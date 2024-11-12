@@ -1,6 +1,6 @@
 lexer grammar MyLexer;
 
-ATOM : (LETTER | NUMBER)+? ;
+ATOM : (LETTER | NUMBER)+?|'''(LETTER | NUMBER)+? ;
 SYMBOL : LETTER(LETTER | NUMBER)?;
 STRING : '"' .*? '"' ;
 COMMENT : ';' ~[\r\n]* -> skip;

@@ -91,7 +91,7 @@ LESS_OR_EQUAL_THAN : '<=';
 GREATER_THAN : '>';
 GREATER_OR_EQUAL_THAN : '>=';
 
-ATOM : (LETTER | NUMBER)+? ;
+ATOM : (LETTER | NUMBER)+? | '\''(LETTER | NUMBER)+? ;
 SYMBOL : LETTER(LETTER | NUMBER)?;
 STRING : '"' .*? '"' ;
 COMMENT : ';' ~[\r\n]* -> skip;

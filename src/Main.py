@@ -4,7 +4,7 @@ from MyLexer import MyLexer  # Replace with the name of your generated lexer cla
 
 def main():
     # Specify the path to your test file
-    input_file = "D:/U Projects/lispCompilerPython/src/test.txt"
+    input_file = "test.txt"
 
     # Create an input stream from the test file
     try:

@@ -1,37 +1,108 @@
 lexer grammar MyLexer;
 
-ATOM : (LETTER | NUMBER)+? ;
-SYMBOL : LETTER(LETTER | NUMBER)?;
-STRING : '"' .*? '"' ;
-COMMENT : ';' ~[\r\n]* -> skip;
-MULTIPLECOMMENT : '||#' .*? '#||' -> skip;
-EQUATION: '('(PLUS|MINUS|MULT|DIV|PERC)' '(NUMBER|SYMBOL|EQUATION)' '((NUMBER|SYMBOL|EQUATION)' ')+')';
-CONDITIONALEQUATION: '('(EQUALS|NOTEQUALS|GREATERTHAN|GREATEROREQUALTHAN|LESSTHAN|LESSOREQUALTHAN)' '(NUMBER|SYMBOL|EQUATION|CONDITIONALEQUATION)' '((NUMBER|SYMBOL|EQUATION|CONDITIONALEQUATION)' ')+')';
-COMMAND:'(' RESERVED (STRING|SYMBOL)+')';
-LIST : OPE (LIST|ATOM|SYMBOL|STRING|EQUATION|COMMAND|RESERVED)* CLO;
+T: 't';
+WRITE: 'write';
+WRITE_LINE: 'write-line';
+PRINT: 'print';
+DEFVAR: 'defvar';
+SETQ: 'setq';
+TYPE: 'type';
+TYPE_OF: 'type-of';
+DEFUN: 'defun';
+IF: 'if';
+COND: 'cond';
+LOOP: 'loop';
+AND: 'and';
+OR: 'or';
+NOT: 'not';
+CLASS: 'class';
+CASE: 'case';
+DO: 'do';
+THROW: 'throw';
+CATCH: 'catch';
+BLOCK: 'block';
+IMPORT: 'import';
+EXPORT: 'export';
+LAMBDA: 'lambda';
+NIL: 'nil';
+LET: 'let';
+LET_STAR: 'let*';
+UNLESS: 'unless';
+WHEN: 'when';
+GO: 'go';
+DECLARE: 'declare';
+FUNCTION: 'function';
+FORMAT: 'format';
+RETURN: 'return';
+RETURN_FROM: 'return-from';
+DEFMACRO: 'defmacro';
+DEFCLASS: 'defclass';
+DEFMETHOD: 'defmethod';
+DEFSTRUCT: 'defstruct';
+DEFGENERIC: 'defgeneric';
+DEFCONSTANT: 'defconstant';
+DEFPARAMETER: 'defparameter';
 
-OPE:'(';
-CLO:')';
+DEFPACKAGE: 'defpackage';
+IN_PACKAGE: 'in-package';
+USE_PACKAGE: 'use-package';
+
+VALUES: 'values';
+PROGN: 'progn';
+
+MAKE_INSTANCE: 'make-instance';
+INITIALIZE_INSTANCE: 'initialize-instance';
+SLOT_VALUE: 'slot-value';
+WITH_SLOTS: 'with-slots';
+WITH_ACCESSORS: 'with-accessors';
+
+RESTART_CASE: 'restart-case';
+HANDLER_CASE: 'handler-case';
+RESTART_BIND: 'restart-bind';
+HANDLER_BIND: 'handler-bind';
+
+LETF: 'letf';
+LETREC: 'letrec';
+TAGBODY: 'tagbody';
+
+DECLAIM: 'declaim';
+DEFTYPE: 'deftype';
+
+WITH_OPEN_FILE: 'with-open-file';
+WITH_OUTPUT_TO_FILE: 'with-output-to-file';
+WITH_INPUT_FROM_STRING: 'with-input-from-string';
+WITH_OUTPUT_TO_STRING: 'with-output-to-string';
+
+WITH_STREAM: 'with-stream';
+WITH_TIMEOUT: 'with-timeout';
+
+LPAR : '('; // OPEN_PAREN
+RPAR : ')'; // OPEN_PAREN
 PLUS : '+';
 MINUS : '-';
 MULT : '*';
 DIV : '/';
-PERC: '%';
+PERC : '%';
 
 EQUALS : '=';
-NOTEQUALS : '/=';
-GREATERTHAN : '>';
-GREATEROREQUALTHAN : '>=';
-LESSTHAN : '<';
-LESSOREQUALTHAN : '<=';
+NOT_EQUALS : '/=';
+LESS_THAN : '<';
+LESS_OR_EQUAL_THAN : '<=';
+GREATER_THAN : '>';
+GREATER_OR_EQUAL_THAN : '>=';
 
-
-
+ATOM : (LETTER | NUMBER)+? ;
+SYMBOL : LETTER(LETTER | NUMBER)?;
+STRING : '"' .*? '"' ;
+COMMENT : ';' ~[\r\n]* -> skip;
+MULTIPLE_COMMENT : '||#' .*? '#||' -> skip;
+IF_CONDITION : LPAR IF (SYMBOL|CONDITIONAL_EQUATION) (LIST)* RPAR;
+DEFINE_FUNCTION : LPAR DEFUN SYMBOL '(' (SYMBOL)* ')' (LIST)* RPAR;
+EQUATION: LPAR (PLUS|MINUS|MULT|DIV|PERC)' '(NUMBER|SYMBOL|EQUATION)' '((NUMBER|SYMBOL|EQUATION)' ')+ RPAR;
+CONDITIONAL_EQUATION: LPAR (EQUALS|NOT_EQUALS|GREATER_THAN|GREATER_OR_EQUAL_THAN|LESS_THAN|LESS_OR_EQUAL_THAN)' '(NUMBER|SYMBOL|EQUATION|CONDITIONAL_EQUATION)' '((NUMBER|SYMBOL|EQUATION|CONDITIONAL_EQUATION)' ')+ RPAR;
+LIST : LPAR (LIST|ATOM|SYMBOL|STRING|EQUATION)* RPAR;
 WS : [ \r\n\t]+ -> skip;
 
-RESERVED : ('write' | 'write-line' | 'print' | 'defvar' | 'setq' | 'type-of' | 'defmacro' | 'format' | 'let'|'return from'|'defun'|'defmacro'|'defvar'|'defparameter'|'defclass'|'defmethod'|'defgeneric'|'defstruct'|'defconstant'|'defpackage'|'in-package'|'use-package'|'export'|'import'|'lambda'|'let'|'let*'|'setq'|'setf'|'if'|'cond'|'case'|'when'|'unless'|'do'|'loop'|'dotimes'|'dolist'|'quote'|'quasiquote'|'unquote'|'unquote-splicing'|'macrolet'|'labels'|'flet'|'multiple-value-bind'|'multiple-value-list'|'return'|'return-from'|'values'|'progn'|'and'|'or'|'not'|'nil'|'t'|'declare'|'function'|'type'|'class'|'format'|'print'|'princ'|'prn'|'with-slots'|'with-accessors'|'slot-value'|'initialize-instance'|'make-instance'|'catch'|'throw'|'block'|'restart-case'|'restart-bind'|'handler-bind'|'handler-case'|'letrec'|'letf'|'tagbody'|'go'|'declaim'|'deftype'|'locally'|'with-open-file'|'with-input-from-string'|'with-output-to-string'|'with-output-to-file'|'with-stream'|'with-timeout'|'let-syntax'|'defsyntax'|'syntax'|'syntax-quote'|'syntax-unquote'|'syntax-unquote-splicing'|'values'|'progn'|'and'|'or'|'not'|'nil'|'t'|'defgeneric'|'defmethod'|'defclass'|'defstruct'|'defvar'|'defparameter'|'defun'|'setq'|'setf'|'let'|'let*'|'lambda'|'if'|'cond'|'case'|'when'|'unless'|'do'|'loop'|'dotimes'|'dolist'|'quote'|'quasiquote'|'unquote'|'unquote-splicing'|'macrolet'|'labels'|'flet'|'multiple-value-bind'|'multiple-value-list'|'return'|'return-from'|'values'|'progn'|'and'|'or'|'not'|'nil'|'t'|'declare'|'function'|'type'|'class'|'format'|'print'|'princ'|'prn'|'with-slots'|'with-accessors'|'slot-value'|'initialize-instance'|'make-instance'|'defpackage'|'in-package'|'use-package'|'export'|'import'|'package'|'loop'|'tagbody'|'go'|'catch'|'throw'|'block'|'restart-case'|'restart-bind'|'handler-bind'|'handler-case'|'letrec'|'letf'|'defconstant'|'defstruct'|'declaim'|'deftype'|'defparameter'|'defun'|'defvar'|'setq'|'setf'|'defconstant'|'declare'|'locally'|'letf'|'letrec'|'with-open-file'|'with-input-from-string'|'with-output-to-string'|'with-output-to-file'|'with-stream'|'with-timeout'|'let-syntax'|'defsyntax'|'syntax'|'syntax-quote'|'syntax-unquote'|'syntax-unquote-splicing'|'values'|'progn'|'return'|'return-from'|'values'|'progn'|'let'|'let*'|'setq'|'setf'|'if'|'cond'|'case'|'when'|'unless'|'do'|'loop'|'dotimes'|'dolist'|'defun'|'defmacro'|'defvar'|'defparameter'|'quote'|'quasiquote'|'unquote'|'unquote-splicing'|'macrolet'|'labels'|'flet'|'multiple-value-bind'|'multiple-value-list'|'return'|'return-from'|'values'|'progn'|'and'|'or'|'not'|'nil'|'t'|'declare'|'function'|'type'|'class'|'format'|'print'|'princ'|'prn'|'defclass'|'defmethod'|'defgeneric'|'with-slots'|'with-accessors'|'slot-value'|'initialize-instance'|'make-instance'|'defpackage'|'in-package'|'use-package'|'export'|'import'|'package'|'loop'|'tagbody'|'go'|'catch'|'throw'|'block'|'restart-case'|'restart-bind'|'handler-bind'|'handler-case'|'letrec'|'letf'|'defconstant'|'defstruct'|'defgeneric'|'defmethod'|'with-slots'|'with-accessors'|'declaim'|'deftype'|'defparameter'|'defun'|'defvar'|'setq'|'setf'|'defconstant'|'declare'|'locally'|'letf'|'letrec'|'with-open-file'|'with-input-from-string'|'with-output-to-string'|'with-output-to-file'|'with-stream'|'with-timeout'|'let-syntax'|'defsyntax'|'syntax'|'syntax-quote'|'syntax-unquote'|'syntax-unquote-splicing'|'values'|'progn'|'and'|'or'|'not'|'nil'|'t'|'declare'|'function'|'type'|'class'|'format'|'print'|'princ'|'prn'|'defclass'|'defmethod'|'defgeneric'|'with-slots'|'with-accessors'|'slot-value'|'initialize-instance'|'make-instance'|'defpackage'|'in-package'|'use-package'|'export'|'import'|'package'|'loop'|'tagbody'|'go'|'catch'|'throw'|'block'|'restart-case'|'restart-bind'|'handler-bind'|'handler-case'|'letrec'|'letf'|'defconstant'|'defstruct'|'defgeneric'|'defmethod'|'with-slots'|'with-accessors'|'declaim'|'deftype'|'defparameter'|'defun'|'defvar'|'setq'|'setf'|'defconstant'|'declare'|'locally'|'letf'|'letrec'|'with-open-file'|'with-input-from-string'|'with-output-to-string'|'with-output-to-file'|'with-stream'|'with-timeout'|'let-syntax'|'defsyntax'|'syntax'|'syntax-quote'|'syntax-unquote'|'syntax-unquote-splicing'|'values'|'progn');
-FUNCTION : '(' 'defun' SYMBOL '(' (SYMBOL)* ')' (LIST)* ')';
-IFCONDITION : '(' 'if' (SYMBOL|CONDITIONALEQUATION) (LIST)* ')';
 //BLOCK : '(' 'block' SYMBOL '(' (LIST)* RESERVED SYMBOL NUMBER ')';
 
 fragment LETTER : [a-zA-Z] ;

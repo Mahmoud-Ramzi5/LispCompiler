@@ -1,10 +1,12 @@
 from antlr4 import *
+from lxml.html.diff import token
+
 from MyLexer import MyLexer  # Replace with the name of your generated lexer class
 
 
 def main():
     # Specify the path to your test file
-    input_file = "test.txt"
+    input_file = "testLisp.lisp"
 
     # Create an input stream from the test file
     try:

@@ -1,5 +1,4 @@
 from antlr4 import *
-from lxml.html.diff import token
 
 from MyLexer import MyLexer  # Replace with the name of your generated lexer class
 

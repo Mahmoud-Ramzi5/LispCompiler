@@ -93,14 +93,14 @@ LESS_OR_EQUAL_THAN : '<=';
 GREATER_THAN : '>';
 GREATER_OR_EQUAL_THAN : '>=';
 
-NUMBER : [0-9]+;
 VAR : MULT SYMBOL MULT;
-ATOM : (LETTER | [0-9])+;
-SYMBOL : LETTER(LETTER | [0-9] | '-')+;
+ATOM : (LETTER | NUMBER)+;
+SYMBOL : LETTER(LETTER | NUMBER | '-')+;
 STRING: DQ ( ~[\\"] | ESCAPE_CHAR )* DQ;
 COMMENT : (';' | ';;') ~[\r\n]* -> skip;
 MULTIPLE_COMMENT : '||#' .*? '#||' -> skip;
 WS : [ \r\n\t]+ -> skip;
 
 fragment ESCAPE_CHAR: '\\' [0btnfr"'\\];
-fragment LETTER : [a-zA-Z] ;
+fragment LETTER : [a-zA-Z];
+fragment NUMBER : [0-9];

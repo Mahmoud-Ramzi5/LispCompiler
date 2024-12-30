@@ -97,6 +97,7 @@ VAR : MULT SYMBOL MULT;
 ATOM : (LETTER | NUMBER)+;
 SYMBOL : LETTER(LETTER | NUMBER | '-')+;
 STRING: DQ ( ~[\\"] | ESCAPE_CHAR )* DQ;
+INT : NUMBER+
 COMMENT : (';' | ';;') ~[\r\n]* -> skip;
 MULTIPLE_COMMENT : '||#' .*? '#||' -> skip;
 WS : [ \r\n\t]+ -> skip;

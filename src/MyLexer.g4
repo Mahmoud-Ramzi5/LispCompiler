@@ -10,6 +10,7 @@ DEFVAR: 'defvar';
 SETQ: 'setq';
 TYPE: 'type';
 SPECIAL: 'special';
+INLINE: 'inline';
 TYPE_OF: 'type-of';
 DEFUN: 'defun';
 IF: 'if';

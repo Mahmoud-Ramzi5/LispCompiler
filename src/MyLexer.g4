@@ -1,5 +1,7 @@
 lexer grammar MyLexer;
 
+DATATYPES : 'integer'|'float'|'double-float'|'short-float'|'character'|'string'|'symbol'|'list'|'array'|'function'|'cons'|'null'|T
+
 T: 't';
 WRITE: 'write';
 WRITE_LINE: 'write-line';
@@ -7,6 +9,7 @@ PRINT: 'print';
 DEFVAR: 'defvar';
 SETQ: 'setq';
 TYPE: 'type';
+SPECIAL: 'special';
 TYPE_OF: 'type-of';
 DEFUN: 'defun';
 IF: 'if';

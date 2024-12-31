@@ -1,6 +1,6 @@
 lexer grammar MyLexer;
 
-DATATYPES : 'integer'|'float'|'double-float'|'short-float'|'character'|'string'|'symbol'|'list'|'array'|'function'|'cons'|'null'|T
+DATATYPES : 'integer'|'float'|'double-float'|'short-float'|'character'|'string'|'symbol'|'list'|'array'|'function'|'cons'|'null'|T;
 
 T: 't';
 WRITE: 'write';
@@ -101,7 +101,9 @@ VAR : MULT SYMBOL MULT;
 ATOM : (LETTER | NUMBER)+;
 SYMBOL : LETTER(LETTER | NUMBER | '-')+;
 STRING: DQ ( ~[\\"] | ESCAPE_CHAR )* DQ;
-INT : NUMBER+
+
+INT : NUMBER+;
+
 COMMENT : (';' | ';;') ~[\r\n]* -> skip;
 MULTIPLE_COMMENT : '||#' .*? '#||' -> skip;
 WS : [ \r\n\t]+ -> skip;

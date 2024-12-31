@@ -1,8 +1,9 @@
 lexer grammar MyLexer;
 
-DATATYPES : 'integer'|'float'|'double-float'|'short-float'|'character'|'string'|'symbol'|'list'|'array'|'function'|'cons'|'null'|T;
+DATATYPES : 'integer'|'float'|'double-float'|'short-float'|'character'|'string'|'symbol'|'list'|'array'|'cons'|'null';
 
 T: 't';
+USE : 'use';
 WRITE: 'write';
 WRITE_LINE: 'write-line';
 PRINT: 'print';
@@ -25,6 +26,7 @@ DO: 'do';
 THROW: 'throw';
 CATCH: 'catch';
 BLOCK: 'block';
+IMPORT_FROM : 'import_from';
 IMPORT: 'import';
 EXPORT: 'export';
 LAMBDA: 'lambda';
@@ -80,8 +82,12 @@ WITH_OUTPUT_TO_STRING: 'with-output-to-string';
 WITH_STREAM: 'with-stream';
 WITH_TIMEOUT: 'with-timeout';
 
-LPAR : '('; // OPEN_PAREN
-RPAR : ')'; // OPEN_PAREN
+SHADOW : 'shadow';
+NICKNAMES : 'nicknames';
+DOCUMENTATION : 'documentation';
+
+LPAREN : '('; // OPEN_PAREN
+RPAREN : ')'; // OPEN_PAREN
 SQ : '\'';  // Single Quote
 DQ : '"';  // Double Quote
 PLUS : '+';
@@ -89,6 +95,8 @@ MINUS : '-';
 MULT : '*';
 DIV : '/';
 PERC : '%';
+
+COLON : ':';
 
 EQUALS : '=';
 NOT_EQUALS : '/=';

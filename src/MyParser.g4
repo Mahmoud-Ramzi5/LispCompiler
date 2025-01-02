@@ -1,6 +1,6 @@
 parser grammar MyParser;
 options { tokenVocab=MyLexer; }
-file : lists? EOF;
+prog : lists? EOF;
 lists : list+;
 list : LPAREN
     ( VAR
@@ -36,6 +36,7 @@ list : LPAREN
     | with_timeout_block
     | type_block
     | type_of_block
+    | class_block
     | not_block
     | or_block
     | and_block
@@ -112,7 +113,7 @@ with_output_to_file_block:WITH_OUTPUT_TO_FILE LPAREN SYMBOL list RPAREN list*;
 with_input_from_string_block:WITH_INPUT_FROM_STRING LPAREN SYMBOL list RPAREN list*;
 with_output_to_string_block:WITH_OUTPUT_TO_STRING LPAREN SYMBOL list RPAREN list*;
 with_stream_block:WITH_STREAM LPAREN SYMBOL list RPAREN list*;
-with_timeout_block:WITH_TIMEOUT LPAREN NUMBER RPAREN list*;
+with_timeout_block:WITH_TIMEOUT LPAREN ATOM RPAREN list*;
 type_block: TYPE list;
 type_of_block: TYPE_OF list;
 class_block: CLASS list*;

@@ -59,7 +59,10 @@ def add_nodes_to_graph(tree, parser, graph, parent=None):
 
     if isinstance(tree, TerminalNode):  # TerminalNode (leaf node)
         # Terminal node: Use the token text as the label\
-        graph.node(str(node_id), label=tree.getText(), shape='ellipse', color='black')
+        token_text = tree.getText().strip()
+        if not token_text or token_text in ["(", ")"]:  # Skip empty or irrelevant nodes
+            return
+        graph.node(str(node_id), label=token_text, shape='ellipse', color='black')
     else:
         # Non-terminal node: Use the rule name as the label
         rule_name = parser.ruleNames[tree.getRuleIndex()]  # Get rule name from parser

@@ -81,7 +81,8 @@ list : LPAREN
 
 equation: (PLUS|MINUS|MULT|DIV|PERC)  (ATOM|SYMBOL|equation)  (ATOM|SYMBOL|equation|list)+ ;
 conditional_equation: (EQUALS|NOT_EQUALS|GREATER_THAN|GREATER_OR_EQUAL_THAN|LESS_THAN|LESS_OR_EQUAL_THAN)  (ATOM|SYMBOL|equation|conditional_equation)  ((ATOM|SYMBOL|equation|conditional_equation) )+ ;
-define_function : DEFUN (VAR|ATOM|SYMBOL) list (ATOM|STRING|list|define_function)*;
+function_arguments: LPAREN SYMBOL+ RPAREN;
+define_function : DEFUN (VAR|ATOM|SYMBOL) function_arguments* (ATOM|STRING|list|define_function)*;
 inline_function : DECLARE LPAREN INLINE (VAR|SYMBOL) RPAREN;
 if_condition : IF (SYMBOL|conditional_equation| list) (list)* ;
 
@@ -91,7 +92,8 @@ format_block: FORMAT (T|NIL) STRING VAR?;
 
 
 print_block: PRINT STRING;
-write_block: WRITE (STRING|list|(SQ list));
+write_string : (STRING|list|(SQ list));
+write_block: WRITE write_string;
 write_line_block: WRITE_LINE STRING;
 defvar_block: DEFVAR SYMBOL list?;
 setq_block: SETQ SYMBOL list;

@@ -34,6 +34,11 @@ class MyParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by MyParser#function_arguments.
+    def visitFunction_arguments(self, ctx:MyParser.Function_argumentsContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by MyParser#define_function.
     def visitDefine_function(self, ctx:MyParser.Define_functionContext):
         return self.visitChildren(ctx)

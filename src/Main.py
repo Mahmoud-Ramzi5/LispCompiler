@@ -48,17 +48,18 @@ def print_ast(tree, parser, indent=""):
             print_ast(child, parser, indent + "  ")  # Increase indentation for child nodes
 
 
-def add_nodes_to_graph(tree, parser, graph, parent=None):
+def add_nodes_to_graph(tree, parser, graph, parent=None, variable_values={}):
     """
     Recursively traverse the parse tree and add nodes to the Graphviz graph.
     :param tree: The current node in the parse tree.
+    :param parser: The parser instance used to get rule names.
     :param graph: The Graphviz Digraph instance.
     :param parent: The parent node (for connecting edges).
+    :param variable_values: A dictionary mapping variable names to their values for evaluation.
     """
     node_id = id(tree)  # Unique identifier for each node
-
     if isinstance(tree, TerminalNode):  # TerminalNode (leaf node)
-        # Terminal node: Use the token text as the label\
+        # Terminal node: Use the token text as the label
         token_text = tree.getText().strip()
         if not token_text or token_text in ["(", ")"]:  # Skip empty or irrelevant nodes
             return
@@ -66,7 +67,19 @@ def add_nodes_to_graph(tree, parser, graph, parent=None):
     else:
         # Non-terminal node: Use the rule name as the label
         rule_name = parser.ruleNames[tree.getRuleIndex()]  # Get rule name from parser
-        # rule_name = tree.getText() if tree.getText() else "UNKNOWN"
+        equation_text = extract_equation_text(tree, variable_values)
+
+        #TODO tried to print output of code some issues remained unfixed
+        # if rule_name == "equation":
+        #     result = evaluate_equation(tree, variable_values)
+        #     print(f"Equation detected: {equation_text} the result is {result}")
+        # elif rule_name == "conditional_equation":
+        #     print(f"Conditional Equation detected: {equation_text}")
+        # elif rule_name == "if_condition":
+        #     print(f"If condition detected: {equation_text}")
+        # elif rule_name == "print_block":
+        #     print(f"Print block detected: {equation_text}")
+
         graph.node(str(node_id), label=rule_name, shape='box', color='blue')
 
     if parent:
@@ -75,7 +88,89 @@ def add_nodes_to_graph(tree, parser, graph, parent=None):
     # Recursively add child nodes only if the current node has children
     if hasattr(tree, 'getChildren'):  # Only non-terminal nodes have getChildren()
         for child in tree.getChildren():
-            add_nodes_to_graph(child, parser, graph, node_id)
+            add_nodes_to_graph(child, parser, graph, node_id, variable_values)
+
+
+def extract_equation_text(tree, variable_values={}):
+    if isinstance(tree, TerminalNode):
+        token_text = tree.getText().strip()
+        if token_text.isdigit():
+            return str(int(token_text))  # Convert to string
+        elif token_text in variable_values:
+            return str(variable_values[token_text])  # Return variable value as string
+        else:
+            return token_text  # Return variable name as is
+
+    elif hasattr(tree, 'getChildren'):
+        return " ".join(str(extract_equation_text(child, variable_values)) for child in tree.getChildren())
+
+    return ""
+
+
+
+def evaluate_equation(tree, variable_values={}):
+    """
+    Recursively evaluate an arithmetic equation from the parse tree in a Lisp context.
+    :param tree: The current node in the parse tree.
+    :param variable_values: A dictionary mapping variable names to their values.
+    :return: The result of the evaluated arithmetic expression.
+    """
+    print(tree)
+    if isinstance(tree, TerminalNode):
+        token_text = tree.getText()
+        if token_text.isdigit():
+            return int(token_text)  # Return integer value
+        elif token_text in variable_values:
+            return variable_values[token_text]  # Return variable value
+        else:
+            raise ValueError(f"Undefined variable: {token_text}")
+
+    elif hasattr(tree, 'getChildren'):
+        children_values = [evaluate_equation(child, variable_values) for child in tree.getChildren()]
+
+        operator = tree.getText()  # Get the operator from the current node
+        if operator == '+':
+            return sum(children_values)
+        elif operator == '-':
+            return children_values[0] - sum(children_values[1:])
+        elif operator == '*':
+            result = 1
+            for value in children_values:
+                result *= value
+            return result
+        elif operator == '/':
+            result = children_values[0]
+            for value in children_values[1:]:
+                result /= value
+            return result
+        else:
+            raise ValueError(f"Unsupported operator: {operator}")
+
+    return 0
+
+def extract_conditional_equation_text(tree):
+    """
+    Recursively extract the full text of an equation from the parse tree.
+    :param tree: The current node in the parse tree.
+    :return: A string representing the equation.
+    """
+    if isinstance(tree, TerminalNode):
+        return tree.getText().strip()  # Terminal nodes contain tokens
+    elif hasattr(tree, 'getChildren'):
+        return " ".join(extract_conditional_equation_text(child) for child in tree.getChildren())
+    return ""
+
+def extract_print_block_text(tree):
+    """
+    Recursively extract the full text of an equation from the parse tree.
+    :param tree: The current node in the parse tree.
+    :return: A string representing the equation.
+    """
+    if isinstance(tree, TerminalNode):
+        return tree.getText().strip()  # Terminal nodes contain tokens
+    elif hasattr(tree, 'getChildren'):
+        return " ".join(extract_print_block_text(child) for child in tree.getChildren())
+    return ""
 
 
 def main():
@@ -106,9 +201,13 @@ def main():
 
     # Create a Graphviz Digraph instance
     graph = Digraph(comment='Parse Tree')
+    variable_values = {
+        'x': 10,
+        'y': 5,
+    }
 
     # Add nodes to the graph recursively
-    add_nodes_to_graph(tree, parser, graph)
+    add_nodes_to_graph(tree, parser, graph,variable_values=variable_values)
 
     # Render the tree to a file (e.g., in PDF or PNG format)
     output_file = 'parse_tree'

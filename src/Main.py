@@ -59,13 +59,19 @@ def add_nodes_to_graph(tree, parser, graph, parent=None, variable_values={}):
     """
     node_id = id(tree)  # Unique identifier for each node
     if isinstance(tree, TerminalNode):  # TerminalNode (leaf node)
-        # to make parse tre not ast tree: just comment the three lines below
+        # to make parse tree not ast tree: just comment the three lines below
         token_text = tree.getText().strip()
         if not token_text or token_text in ["(", ")", "[", "]", "<", ">", ":"]:  # Skip empty or irrelevant nodes
             return
 
+        # to make parse tree
+        # var = tree.getSymbol()
+        # text = tree.getText().strip()
+        # type = parser.symbolicNames[var.type]
+        # label=f"{type}={text}"
+
         # Terminal node: Use the token text as the label
-        graph.node(str(node_id), label=token_text, shape='ellipse', color='black')
+        graph.node(str(node_id), label=token_text , shape='ellipse', color='black')
     else:
         # Non-terminal node: Use the rule name as the label
         rule_name = parser.ruleNames[tree.getRuleIndex()]  # Get rule name from parser
@@ -199,7 +205,7 @@ def main():
     #     sys.exit(1)
     # file_name = sys.argv[1]
 
-    file_name = "testLisp.lisp"
+    file_name = "addFunctionTest.txt"
 
     # Step 1: Parse the input file
     parser = get_parser(file_name)

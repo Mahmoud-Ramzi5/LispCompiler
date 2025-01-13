@@ -1,0 +1,56 @@
+// Parse Tree
+digraph {
+	2442612129616 [label=prog color=blue shape=box]
+	2442612556976 [label=lists color=blue shape=box]
+	2442612129616 -> 2442612556976
+	2442612557872 [label=list color=blue shape=box]
+	2442612556976 -> 2442612557872
+	2442613600912 [label="LPAREN=(" color=black shape=ellipse]
+	2442612557872 -> 2442613600912
+	2442612566160 [label=define_function color=blue shape=box]
+	2442612557872 -> 2442612566160
+	2442608010192 [label="DEFUN=defun" color=black shape=ellipse]
+	2442612566160 -> 2442608010192
+	2442609682640 [label="ATOM=add" color=black shape=ellipse]
+	2442612566160 -> 2442609682640
+	2442612566832 [label=function_arguments color=blue shape=box]
+	2442612566160 -> 2442612566832
+	2442613688464 [label="LPAREN=(" color=black shape=ellipse]
+	2442612566832 -> 2442613688464
+	2442613688720 [label="ATOM=x" color=black shape=ellipse]
+	2442612566832 -> 2442613688720
+	2442613688784 [label="ATOM=y" color=black shape=ellipse]
+	2442612566832 -> 2442613688784
+	2442613688848 [label="RPAREN=)" color=black shape=ellipse]
+	2442612566832 -> 2442613688848
+	2442612569072 [label=list color=blue shape=box]
+	2442612566160 -> 2442612569072
+	2442608204496 [label="LPAREN=(" color=black shape=ellipse]
+	2442612569072 -> 2442608204496
+	2442612809456 [label=equation color=blue shape=box]
+	2442612569072 -> 2442612809456
+	2442594731344 [label="PLUS=+" color=black shape=ellipse]
+	2442612809456 -> 2442594731344
+	2442610636880 [label="ATOM=x" color=black shape=ellipse]
+	2442612809456 -> 2442610636880
+	2442608008016 [label="ATOM=y" color=black shape=ellipse]
+	2442612809456 -> 2442608008016
+	2442608129872 [label="RPAREN=)" color=black shape=ellipse]
+	2442612569072 -> 2442608129872
+	2442613599248 [label="RPAREN=)" color=black shape=ellipse]
+	2442612557872 -> 2442613599248
+	2442613156544 [label=list color=blue shape=box]
+	2442612556976 -> 2442613156544
+	2442613598608 [label="LPAREN=(" color=black shape=ellipse]
+	2442613156544 -> 2442613598608
+	2442613602192 [label="ATOM=add" color=black shape=ellipse]
+	2442613156544 -> 2442613602192
+	2442613597776 [label="ATOM=10" color=black shape=ellipse]
+	2442613156544 -> 2442613597776
+	2442613598544 [label="ATOM=20" color=black shape=ellipse]
+	2442613156544 -> 2442613598544
+	2442613597712 [label="RPAREN=)" color=black shape=ellipse]
+	2442613156544 -> 2442613597712
+	2442607977424 [label="WS=<EOF>" color=black shape=ellipse]
+	2442612129616 -> 2442607977424
+}

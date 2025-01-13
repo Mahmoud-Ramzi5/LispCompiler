@@ -1,0 +1,40 @@
+// Parse Tree
+digraph {
+	1892580409168 [label=prog color=blue shape=box]
+	1892581622960 [label=lists color=blue shape=box]
+	1892580409168 -> 1892581622960
+	1892581623856 [label=list color=blue shape=box]
+	1892581622960 -> 1892581623856
+	1892581632144 [label=define_function color=blue shape=box]
+	1892581623856 -> 1892581632144
+	1892582587344 [label=defun color=black shape=ellipse]
+	1892581632144 -> 1892582587344
+	1892018709840 [label=add color=black shape=ellipse]
+	1892581632144 -> 1892018709840
+	1892581632816 [label=function_arguments color=blue shape=box]
+	1892581632144 -> 1892581632816
+	1892582691664 [label=x color=black shape=ellipse]
+	1892581632816 -> 1892582691664
+	1892582691728 [label=y color=black shape=ellipse]
+	1892581632816 -> 1892582691728
+	1892581635056 [label=list color=blue shape=box]
+	1892581632144 -> 1892581635056
+	1892581875440 [label=equation color=blue shape=box]
+	1892581635056 -> 1892581875440
+	1892576289360 [label="+" color=black shape=ellipse]
+	1892581875440 -> 1892576289360
+	1892576408016 [label=x color=black shape=ellipse]
+	1892581875440 -> 1892576408016
+	1892576410384 [label=y color=black shape=ellipse]
+	1892581875440 -> 1892576410384
+	1892582206144 [label=list color=blue shape=box]
+	1892581622960 -> 1892582206144
+	1892582584848 [label=add color=black shape=ellipse]
+	1892582206144 -> 1892582584848
+	1892582583824 [label=10 color=black shape=ellipse]
+	1892582206144 -> 1892582583824
+	1892582584976 [label=20 color=black shape=ellipse]
+	1892582206144 -> 1892582584976
+	1892576291344 [label=<EOF> color=black shape=ellipse]
+	1892580409168 -> 1892576291344
+}

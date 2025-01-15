@@ -25,8 +25,8 @@ def main():
     # Step 2: Build the parse tree (starting from 'prog')
     tree = parser.prog()
     ast = AST(tree, parser)
-    # print("AST")
-    # print(ast)
+    print("AST")
+    print(ast)
 
     # solve simple equations
     ast.solve_equation(tree, variable_values={"x": 5, "y": 10})

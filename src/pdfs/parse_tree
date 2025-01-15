@@ -1,0 +1,56 @@
+// parse_tree
+digraph {
+	2522741303328 [label=prog color=blue shape=box]
+	2522741302208 [label=lists color=blue shape=box]
+	2522741303328 -> 2522741302208
+	2522741307136 [label=list color=blue shape=box]
+	2522741302208 -> 2522741307136
+	2522746229776 [label="LPAREN: (" color=black shape=ellipse]
+	2522741307136 -> 2522746229776
+	2522745899392 [label=define_function color=blue shape=box]
+	2522741307136 -> 2522745899392
+	2522746226000 [label="DEFUN: defun" color=black shape=ellipse]
+	2522745899392 -> 2522746226000
+	2522705469200 [label="ATOM: add" color=black shape=ellipse]
+	2522745899392 -> 2522705469200
+	2522745900064 [label=function_arguments color=blue shape=box]
+	2522745899392 -> 2522745900064
+	2522746225936 [label="LPAREN: (" color=black shape=ellipse]
+	2522745900064 -> 2522746225936
+	2522746225680 [label="ATOM: x" color=black shape=ellipse]
+	2522745900064 -> 2522746225680
+	2522746225616 [label="ATOM: y" color=black shape=ellipse]
+	2522745900064 -> 2522746225616
+	2522746225552 [label="RPAREN: )" color=black shape=ellipse]
+	2522745900064 -> 2522746225552
+	2522746129440 [label=list color=blue shape=box]
+	2522745899392 -> 2522746129440
+	2522746225360 [label="LPAREN: (" color=black shape=ellipse]
+	2522746129440 -> 2522746225360
+	2522746130112 [label=equation color=blue shape=box]
+	2522746129440 -> 2522746130112
+	2522712942800 [label="PLUS: +" color=black shape=ellipse]
+	2522746130112 -> 2522712942800
+	2522746234000 [label="ATOM: x" color=black shape=ellipse]
+	2522746130112 -> 2522746234000
+	2522746235280 [label="ATOM: y" color=black shape=ellipse]
+	2522746130112 -> 2522746235280
+	2522746232016 [label="RPAREN: )" color=black shape=ellipse]
+	2522746129440 -> 2522746232016
+	2522746232976 [label="RPAREN: )" color=black shape=ellipse]
+	2522741307136 -> 2522746232976
+	2522746130672 [label=list color=blue shape=box]
+	2522741302208 -> 2522746130672
+	2522746233104 [label="LPAREN: (" color=black shape=ellipse]
+	2522746130672 -> 2522746233104
+	2522746233168 [label="ATOM: add" color=black shape=ellipse]
+	2522746130672 -> 2522746233168
+	2522746233232 [label="ATOM: 10" color=black shape=ellipse]
+	2522746130672 -> 2522746233232
+	2522746233296 [label="ATOM: 20" color=black shape=ellipse]
+	2522746130672 -> 2522746233296
+	2522746233360 [label="RPAREN: )" color=black shape=ellipse]
+	2522746130672 -> 2522746233360
+	2522746233488 [label="WS: <EOF>" color=black shape=ellipse]
+	2522741303328 -> 2522746233488
+}

@@ -1,0 +1,40 @@
+// ast_tree
+digraph {
+	2344103011264 [label=prog color=blue shape=box]
+	2344103015744 [label=lists color=blue shape=box]
+	2344103011264 -> 2344103015744
+	2344103016752 [label=list color=blue shape=box]
+	2344103015744 -> 2344103016752
+	2344108067872 [label=define_function color=blue shape=box]
+	2344103016752 -> 2344108067872
+	2344108373968 [label=defun color=black shape=ellipse]
+	2344108067872 -> 2344108373968
+	2344108374032 [label=add color=black shape=ellipse]
+	2344108067872 -> 2344108374032
+	2344108068768 [label=function_arguments color=blue shape=box]
+	2344108067872 -> 2344108068768
+	2344108374672 [label=x color=black shape=ellipse]
+	2344108068768 -> 2344108374672
+	2344108374864 [label=y color=black shape=ellipse]
+	2344108068768 -> 2344108374864
+	2344108297360 [label=list color=blue shape=box]
+	2344108067872 -> 2344108297360
+	2344108298032 [label=equation color=blue shape=box]
+	2344108297360 -> 2344108298032
+	2344075176144 [label="+" color=black shape=ellipse]
+	2344108298032 -> 2344075176144
+	2344108365264 [label=x color=black shape=ellipse]
+	2344108298032 -> 2344108365264
+	2344108363792 [label=y color=black shape=ellipse]
+	2344108298032 -> 2344108363792
+	2344108298592 [label=list color=blue shape=box]
+	2344103015744 -> 2344108298592
+	2344108366032 [label=add color=black shape=ellipse]
+	2344108298592 -> 2344108366032
+	2344108365968 [label=10 color=black shape=ellipse]
+	2344108298592 -> 2344108365968
+	2344108365904 [label=20 color=black shape=ellipse]
+	2344108298592 -> 2344108365904
+	2344108365712 [label=<EOF> color=black shape=ellipse]
+	2344103011264 -> 2344108365712
+}
